@@ -16,8 +16,7 @@ export const Navigation = () => {
     <nav className="navbar">
       <div className="nav-container">
         <div className="nav-brand">
-          <span className="nav-icon">📡</span>
-          <span className="nav-title">Wireless Network Designer</span>
+          Wireless Network Designer
           <span className="api-status online">AI Connected</span>
         </div>
         <div className="nav-links">
@@ -40,18 +39,9 @@ export const Header = () => {
           Design and analyze wireless communication systems with detailed AI explanations
         </p>
         <div className="header-features">
-          <div className="feature-item">
-            <span className="feature-icon">🔧</span>
-            <span>System Calculations</span>
-          </div>
-          <div className="feature-item">
-            <span className="feature-icon">🤖</span>
-            <span>AI Explanations</span>
-          </div>
-          <div className="feature-item">
-            <span className="feature-icon">📊</span>
-            <span>Real-time Results</span>
-          </div>
+          <div className="feature-item">System Calculations</div>
+          <div className="feature-item">AI Explanations</div>
+          <div className="feature-item">Real-time Results</div>
         </div>
       </div>
     </header>
