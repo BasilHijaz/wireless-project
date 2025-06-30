@@ -3,6 +3,7 @@ import './App.css';
 import WirelessCalculator from './components/WirelessCalculator.jsx';
 import OFDMCalculator from './components/OFDMCalculator.jsx';
 import LinkBudgetCalculator from './components/LinkBudgetCalculator.jsx';
+import CellularCalculator from './components/CellularCalculator.jsx';
 import { Navigation, Header } from './components/SharedComponents.jsx';
 
 // SVG Icons
@@ -33,17 +34,7 @@ function App() {
       case 'link-budget':
         return <LinkBudgetCalculator />;
       case 'cellular':
-        return (
-          <div className="calculator-container">
-            <div className="calculator-header">
-              <h2>Cellular Design</h2>
-              <p>Design cellular networks based on user-specified parameters and requirements. (Coming soon!)</p>
-            </div>
-            <div className="placeholder-card">
-              <p>Cellular design tools will be available in a future update.</p>
-            </div>
-          </div>
-        );
+        return <CellularCalculator />;
       default:
         return <WirelessCalculator />;
     }
