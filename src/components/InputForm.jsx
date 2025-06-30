@@ -52,13 +52,22 @@ const InputForm = ({ title, fields, onSubmit, submitLabel, loading }) => {
       fields.forEach(field => {
         const value = formData[field.name];
         if (value !== undefined && value !== '') {
-          if (field.type === 'number' || field.type === 'select') {
+          // Check if field should be converted to number
+          if (field.type === 'number') {
+            processedData[field.name] = parseFloat(value);
+          } else if (field.type === 'select' && field.numericSelect) {
+            // Only convert select to number if explicitly marked as numeric
             processedData[field.name] = parseFloat(value);
           } else {
+            // Keep as string for text, select (non-numeric), etc.
             processedData[field.name] = value;
           }
         } else if (field.defaultValue) {
-          processedData[field.name] = parseFloat(field.defaultValue);
+          if (field.type === 'number' || field.numericSelect) {
+            processedData[field.name] = parseFloat(field.defaultValue);
+          } else {
+            processedData[field.name] = field.defaultValue;
+          }
         }
       });
       

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 // Loading Spinner Component
 export const LoadingSpinner = ({ message = "Loading..." }) => {
@@ -10,6 +11,56 @@ export const LoadingSpinner = ({ message = "Loading..." }) => {
   );
 };
 
+// Health Status Component
+const HealthStatus = () => {
+  const [status, setStatus] = useState('checking'); // 'checking', 'healthy', 'unhealthy'
+  const [message, setMessage] = useState('Checking...');
+
+  const checkHealth = async () => {
+    try {
+      const response = await axios.get('/api/health', { timeout: 5000 });
+      if (response.data.status === 'healthy') {
+        setStatus('healthy');
+        setMessage('AI Connected');
+      } else {
+        setStatus('unhealthy');
+        setMessage('AI Disconnected');
+      }
+    } catch (error) {
+      setStatus('unhealthy');
+      setMessage('AI Disconnected');
+    }
+  };
+
+  useEffect(() => {
+    // Initial health check
+    checkHealth();
+    
+    // Set up periodic health checks every 30 seconds
+    const interval = setInterval(checkHealth, 30000);
+    
+    // Cleanup interval on unmount
+    return () => clearInterval(interval);
+  }, []);
+
+  const getStatusClass = () => {
+    switch (status) {
+      case 'healthy':
+        return 'api-status online';
+      case 'unhealthy':
+        return 'api-status offline';
+      default:
+        return 'api-status checking';
+    }
+  };
+
+  return (
+    <span className={getStatusClass()}>
+      {message}
+    </span>
+  );
+};
+
 // Navigation Component
 export const Navigation = () => {
   return (
@@ -17,7 +68,7 @@ export const Navigation = () => {
       <div className="nav-container">
         <div className="nav-brand">
           Wireless Network Designer
-          <span className="api-status online">AI Connected</span>
+          <HealthStatus />
         </div>
         <div className="nav-links">
           <a href="#home" className="nav-link active">Home</a>

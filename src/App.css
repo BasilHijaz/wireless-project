@@ -14,6 +14,9 @@
   --shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
   --text-dark: #222;
   --text-light: #555;
+  --status-online: #28a745;
+  --status-offline: #dc3545;
+  --status-checking: #ffc107;
 }
 
 /* Global Styles */
@@ -70,13 +73,60 @@ body {
 
 .api-status {
   margin-left: 18px;
-  padding: 3px 12px;
+  padding: 4px 12px;
   border-radius: 12px;
   font-size: 0.85rem;
-  background: var(--color4);
-  color: var(--text-dark);
-  border: 1px solid var(--color3);
   font-weight: 500;
+  transition: all var(--transition-speed);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.api-status::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.api-status.online {
+  background: rgba(40, 167, 69, 0.1);
+  color: var(--status-online);
+  border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.api-status.online::before {
+  background: var(--status-online);
+  box-shadow: 0 0 4px rgba(40, 167, 69, 0.5);
+}
+
+.api-status.offline {
+  background: rgba(220, 53, 69, 0.1);
+  color: var(--status-offline);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+.api-status.offline::before {
+  background: var(--status-offline);
+}
+
+.api-status.checking {
+  background: rgba(255, 193, 7, 0.1);
+  color: var(--status-checking);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.api-status.checking::before {
+  background: var(--status-checking);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
 }
 
 .nav-links {

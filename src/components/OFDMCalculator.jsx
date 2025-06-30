@@ -14,6 +14,7 @@ const OFDMCalculator = () => {
       name: 'modulation_order',
       label: 'Modulation Order',
       type: 'select',
+      numericSelect: true,
       options: [
         { value: '', label: 'Select modulation' },
         { value: '2', label: 'BPSK (2)' },
